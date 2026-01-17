@@ -1,0 +1,100 @@
+/* ===== General Styles ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #fff;
+}
+
+/* Dark / Light Mode */
+body.dark-mode { background: #0f172a; color: #fff; }
+body.light-mode { background: #f0f0f0; color: #111; }
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #020617;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header h1 { margin: 0; font-size: 1.5rem; }
+.logo { height: 50px; }
+.theme-btn img { height: 30px; cursor: pointer; }
+
+/* Profile Area */
+.profile-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #020617;
+}
+.profile-area img { width: 50px; height: 50px; border-radius: 50%; }
+.profile-area input, .profile-area select {
+  padding: 5px; border-radius: 6px; border: none; font-size: 0.9rem;
+}
+
+/* Image Analysis */
+.image-analysis {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #020617;
+  gap: 10px;
+}
+.image-analysis input { padding: 5px; border-radius: 6px; border: none; }
+.image-analysis button {
+  padding: 6px 12px; border-radius: 6px; border: none; background: #22c55e; cursor: pointer;
+}
+#analysisResult {
+  padding: 10px;
+  background: #1e293b;
+  border-radius: 8px;
+  min-height: 50px;
+}
+
+/* Chat Container */
+#chat-container {
+  height: 40vh;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Chat Bubbles */
+.user-message, .ai-message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  word-wrap: break-word;
+}
+.user-message { background: #2563eb; align-self: flex-end; }
+.ai-message { background: #1e293b; align-self: flex-start; }
+
+/* Input Area */
+.input-area {
+  display: flex;
+  padding: 10px;
+  background: #020617;
+  position: sticky;
+  bottom: 0;
+}
+.input-area input {
+  flex: 1; padding: 10px; border-radius: 8px; border: none; font-size: 1rem;
+}
+.input-area button {
+  margin-left: 10px; padding: 0 14px; border-radius: 8px; border: none; background: #22c55e; cursor: pointer;
+}
+.input-area button img { height: 24px; }
+
+/* Scrollbar */
+#chat-container::-webkit-scrollbar { width: 8px; }
+#chat-container::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 4px; }
+#chat-container::-webkit-scrollbar-track { background: #020617; }

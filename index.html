@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroMind AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+  <!-- Header / Logo -->
+  <header>
+    <img src="assets/neuromind_logo.png" alt="NeuroMind Logo" class="logo">
+    <h1>NeuroMind AI</h1>
+    <button id="themeToggle" class="theme-btn">
+      <img src="icons/dark_mode.svg" alt="Theme Toggle">
+    </button>
+  </header>
+
+  <!-- Profile Section -->
+  <div class="profile-area">
+    <img id="userAvatar" src="assets/avatar_default.png" alt="User Avatar">
+    <input type="file" id="avatarUpload" accept="image/*">
+    <select id="animeSelect">
+      <option value="">Select Anime Avatar</option>
+      <option value="anime1.png">Anime 1</option>
+      <option value="anime2.png">Anime 2</option>
+      <option value="anime3.png">Anime 3</option>
+      <option value="anime4.png">Anime 4</option>
+      <option value="anime5.png">Anime 5</option>
+      <option value="anime6.png">Anime 6</option>
+      <option value="anime7.png">Anime 7</option>
+      <option value="anime8.png">Anime 8</option>
+      <option value="anime9.png">Anime 9</option>
+      <option value="anime10.png">Anime 10</option>
+    </select>
+  </div>
+
+  <!-- Image Analysis Section -->
+  <div class="image-analysis">
+    <input type="file" id="imageUpload" accept="image/*">
+    <button id="analyzeBtn">Analyze Image</button>
+    <div id="analysisResult"></div>
+  </div>
+
+  <!-- Chat Container -->
+  <div id="chat-container"></div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button id="sendBtn">
+      <img src="icons/send.svg" alt="Send">
+    </button>
+  </div>
+
+  <!-- Audio -->
+  <audio id="sendSound" src="sounds/send.mp3"></audio>
+  <audio id="receiveSound" src="sounds/receive.mp3"></audio>
+  <audio id="hoverSound" src="sounds/hover.mp3"></audio>
+
+  <!-- JS Files -->
+  <script src="js/sound.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/api.js"></script>
+
+  <script>
+    // Send message on button click
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      sendMessage();
+    });
+
+    // Send message on Enter key
+    document.getElementById("userInput").addEventListener("keypress", (e) => {
+      if(e.key === "Enter") sendMessage();
+    });
+
+    // Profile Avatar logic
+    const avatarInput = document.getElementById("avatarUpload");
+    const animeSelect = document.getElementById("animeSelect");
+    const userAvatar = document.getElementById("userAvatar");
+
+    avatarInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) userAvatar.src = URL.createObjectURL(file);
+    });
+
+    animeSelect.addEventListener("change", (e) => {
+      const selected = e.target.value;
+      if (selected) userAvatar.src = `anime/${selected}`;
+    });
+
+    // Image analysis (fake example)
+    const imageUpload = document.getElementById("imageUpload");
+    const analyzeBtn = document.getElementById("analyzeBtn");
+    const analysisResult = document.getElementById("analysisResult");
+
+    analyzeBtn.addEventListener("click", () => {
+      const file = imageUpload.files[0];
+      if (!file) {
+        analysisResult.innerText = "Please upload an image first.";
+        return;
+      }
+
+      analysisResult.innerHTML = `
+        <strong>Analysis Result:</strong><br>
+        Image Name: ${file.name}<br>
+        File Size: ${(file.size / 1024).toFixed(2)} KB<br>
+        Type: ${file.type}<br>
+        This image looks awesome! 😎
+      `;
+    });
+
+    // Load saved chat history
+    const history = loadChatHistory();
+    history.forEach(msg => {
+      if(msg.role === "user") addUserMessage(msg.text);
+      else addAIMessage(msg.text);
+    });
+  </script>
+
+</body>
+</html>
